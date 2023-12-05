@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31205.134
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{54C69256-9C55-41DC-A383-6C00EA66DB39}"
 	ProjectSection(SolutionItems) = preProject
@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		MYOB.API.SDK\SDK.Package\Package.nuspec = MYOB.API.SDK\SDK.Package\Package.nuspec
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SDK.NET80", "MYOB.API.SDK\SDK.NET80\SDK.NET80.csproj", "{A992ABE1-A56F-4253-BE62-E6F3083161BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +54,10 @@ Global
 		{33DD5156-E3B7-47FC-913D-5216019146A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33DD5156-E3B7-47FC-913D-5216019146A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33DD5156-E3B7-47FC-913D-5216019146A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A992ABE1-A56F-4253-BE62-E6F3083161BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A992ABE1-A56F-4253-BE62-E6F3083161BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A992ABE1-A56F-4253-BE62-E6F3083161BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A992ABE1-A56F-4253-BE62-E6F3083161BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
