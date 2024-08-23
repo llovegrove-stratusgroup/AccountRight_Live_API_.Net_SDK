@@ -30,6 +30,20 @@ namespace MYOB.AccountRight.SDK
         /// </summary>
         string ApiBaseUrl { get; }
 
+        /// <summary>
+        /// The username for password flow
+        /// </summary>
+        string AuthUsername { get;  }
+
+        /// <summary>
+        /// The password for password flow
+        /// </summary>
+        string AuthPassword { get;  }
+        /// <summary>
+        /// The api for password flow
+        /// </summary>
+        string AuthApiKey { get; }
+
 #if !PORTABLE
         /// <summary>
         /// Gets or sets the cache policy for all requests
