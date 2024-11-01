@@ -464,8 +464,6 @@
     <Folder Include="Services\Version2\Company\" />
     <Folder Include="Services\Version2\Contact\" />
     <Folder Include="Services\Version2\GeneralLedger\" />
-    <Folder Include="Services\Version2\Inventory\" />
-    <Folder Include="Services\Version2\" />
     <Folder Include="Services\Version2\Report\BalanceSheetSummary\" />
     <Folder Include="Services\Version2\Report\GST\" />
     <Folder Include="Services\Version2\Report\JournalTransactionHistory\" />

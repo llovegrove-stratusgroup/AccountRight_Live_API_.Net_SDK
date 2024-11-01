@@ -1,0 +1,169 @@
+﻿<UserControl
+	x:Class="Stratus.AccountRightExport.Views.MainView"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+	xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+	xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+	xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+	xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+	xmlns:m="clr-namespace:Stratus.AccountRightExport.Windows.Markup"
+	xmlns:vm="clr-namespace:Stratus.AccountRightExport.ViewModels"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	mc:Ignorable="d"
+	d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
+	d:DesignHeight="600" 
+	d:DesignWidth="480">
+	
+	<UserControl.DataContext>
+		<vm:MainViewModel />
+	</UserControl.DataContext>
+
+	<dxmvvm:Interaction.Behaviors>
+		<dx:DXMessageBoxService />
+		<dxmvvm:DispatcherService />
+	</dxmvvm:Interaction.Behaviors>
+
+	<dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Stretch">
+
+		<dxlc:LayoutItem Label="MYOB AccountRight URL" AddColonToLabel="True">
+			<dxe:ButtonEdit AllowDefaultButton="False" EditValue="{Binding Company.ServerAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+				<dxe:ButtonInfo GlyphKind="Search" Command="{Binding GetCompanyFilesAsyncCommand}" />
+			</dxe:ButtonEdit>
+		</dxlc:LayoutItem>
+
+		<dxlc:LayoutGroup 
+			Header="Company Files" 
+			Orientation="Vertical"
+			View="GroupBox"
+			HorizontalAlignment="Stretch"
+			VerticalAlignment="Stretch">
+
+			<dxlc:LayoutItem Label="User" AddColonToLabel="True">
+				<dxe:TextEdit EditValue="{Binding Company.UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+			</dxlc:LayoutItem>
+
+			<dxlc:LayoutItem Label="Password" AddColonToLabel="True">
+				<dxe:PasswordBoxEdit EditValue="{Binding Company.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+			</dxlc:LayoutItem>
+
+			<dxlc:LayoutItem VerticalAlignment="Stretch">
+				<dxg:GridControl 
+					AutoGenerateColumns="None"
+					ItemsSource="{Binding CompaniesAvailable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+					SelectedItem="{Binding SelectedCompany}"
+					SelectionMode="Row">
+
+					<dxg:GridControl.Columns>
+						<dxg:GridColumn FieldName="Name" Header="Name" IsSmart="True" />
+						<dxg:GridColumn FieldName="LibraryPath" Header="Library Path" IsSmart="True" />
+						<dxg:GridColumn FieldName="ProductVersion" Header="Version" IsSmart="True" />
+						<dxg:GridColumn FieldName="ProductLevel" Header="Product" IsSmart="True" />
+					</dxg:GridControl.Columns>
+
+					<dxg:GridControl.View>
+						<dxg:TableView
+							AllowEditing="False"
+							AllowGrouping="False"
+							AutoWidth="True"
+							BestFitMode="AllRows"
+							NavigationStyle="Row"
+							ShowGroupPanel="False" />
+					</dxg:GridControl.View>
+					
+				</dxg:GridControl>
+			</dxlc:LayoutItem>
+			
+		</dxlc:LayoutGroup>
+
+		<dxlc:LayoutGroup
+			Header="SQL Database"
+			Orientation="Vertical"
+			View="GroupBox"
+			HorizontalAlignment="Stretch">
+
+			<dxlc:LayoutItem Label="Server" AddColonToLabel="True">
+				<dxe:TextEdit EditValue="{Binding Database.SqlServerInstance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+			</dxlc:LayoutItem>
+
+			<dxlc:LayoutItem Label="Database" AddColonToLabel="True">
+				<dxe:TextEdit EditValue="{Binding Database.DatabaseName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+			</dxlc:LayoutItem>
+
+			<dxlc:LayoutItem Label="User ID" AddColonToLabel="True">
+				<dxe:TextEdit EditValue="{Binding Database.UserID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+			</dxlc:LayoutItem>
+
+			<dxlc:LayoutItem Label="Password" AddColonToLabel="True">
+				<dxe:PasswordBoxEdit EditValue="{Binding Database.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+			</dxlc:LayoutItem>
+
+		</dxlc:LayoutGroup>
+
+		<dxlc:LayoutGroup
+			Header="Conversion Progress"
+			HorizontalAlignment="Stretch"
+			Orientation="Vertical"
+			View="GroupBox">
+
+			<dxlc:LayoutItem VerticalAlignment="Stretch">
+				<dxg:GridControl
+					AutoGenerateColumns="None"
+					ItemsSource="{Binding ServiceList}"
+					SelectedItems="{Binding ServiceListSelectedItems}"
+					SelectionMode="MultipleRow"
+					>
+
+					<dxg:GridControl.Columns>
+						<dxg:GridColumn FieldName="ContractName" AllowEditing="False" Header="Contract" ReadOnly="True" AllowSorting="False" />
+						<dxg:GridColumn FieldName="ReadProgress" AllowEditing="False" Header="Read" ReadOnly="True" AllowSorting="False">
+							<dxg:GridColumn.EditSettings>
+								<dxe:ProgressBarEditSettings Minimum="0" Maximum="100" />
+							</dxg:GridColumn.EditSettings>
+						</dxg:GridColumn>
+						<dxg:GridColumn FieldName="WriteProgress" AllowEditing="False" Header="Write" ReadOnly="True" AllowSorting="False">
+							<dxg:GridColumn.EditSettings>
+								<dxe:ProgressBarEditSettings Minimum="0" Maximum="100" />
+							</dxg:GridColumn.EditSettings>
+						</dxg:GridColumn>
+					</dxg:GridControl.Columns>
+
+					<dxg:GridControl.View>
+						<dxg:TableView
+							AllowGrouping="False"
+							AutoWidth="True"
+							BestFitMode="AllRows"
+							EnableSelectedRowAppearance="False"
+							ShowCheckBoxSelectorColumn="True"
+							ShowGroupPanel="False"
+							/>
+					</dxg:GridControl.View>
+					
+				</dxg:GridControl>
+			</dxlc:LayoutItem>
+			
+		</dxlc:LayoutGroup>
+		
+		<dxlc:LayoutGroup HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
+			<dxlc:LayoutItem HorizontalAlignment="Right">
+				<dx:SimpleButton 
+					Command="{Binding ConvertAsyncCommand}"
+					Content="Convert"
+					Height="23"
+					Width="75"
+					/>
+			</dxlc:LayoutItem>
+			<dxlc:LayoutItem HorizontalAlignment="Right">
+				<dx:SimpleButton 
+					Command="{Binding CancelCommand}"
+					Content="Cancel"
+					Height="23"
+					Width="75"
+					/>
+			</dxlc:LayoutItem>
+		</dxlc:LayoutGroup>
+		
+	</dxlc:LayoutControl>
+	
+</UserControl>
